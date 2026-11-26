@@ -1,0 +1,46 @@
+{
+  "task_id": "task_click_001_deprecated_option",
+  "target_repo": "https://github.com/pallets/click",
+  "baseline_commit": "7eb021a68430dc0702d1d0ad510617ad4ea9ad27",
+  "harbor_spec_version": "0.25.2",
+  "requirement": {
+    "title": "Add `deprecated` parameter and warning to `click.Option`",
+    "description": "Extend Click's option decorator and Option class to support a `deprecated` flag. When users invoke a CLI command providing a deprecated option, Click should output a formatted deprecation warning to stderr without aborting command execution.",
+    "acceptance_criteria": [
+      "Support `deprecated=True` on `click.Option`, emitting warning: 'Option \"<name>\" is deprecated.'",
+      "Support `deprecated=\"Custom message\"`, emitting the custom explanation string.",
+      "Warnings must be emitted to sys.stderr via Click's echo or standard warnings.",
+      "Command execution must succeed normally (exit code 0) after warning.",
+      "All existing Click option tests and parameters must remain 100% backward-compatible."
+    ],
+    "affected_files": [
+      "src/click/core.py"
+    ],
+    "difficulty": "medium",
+    "category": "feature_development"
+  },
+  "environment": {
+    "docker_image": "python:3.11-slim",
+    "working_dir": "/workspace",
+    "setup_commands": [
+      "pip install --upgrade pip",
+      "pip install pytest",
+      "pip install -e ."
+    ],
+    "timeout_seconds": 300,
+    "memory_limit": "2g",
+    "cpu_limit": "2"
+  },
+  "feature_tests": [
+    "import click\nfrom click.testing import CliRunner\n\ndef test_deprecated_option_warning(capsys):\n    @click.command()\n    @click.option(\"--old-flag\", deprecated=True)\n    def cli(old_flag):\n        click.echo(\"Executed!\")\n\n    runner = CliRunner()\n    result = runner.invoke(cli, [\"--old-flag\", \"value\"])\n    assert result.exit_code == 0\n    assert \"Executed!\" in result.output\n    assert \"Option '--old-flag' is deprecated\" in result.output or \"deprecated\" in result.output.lower()\n\ndef test_custom_deprecation_message():\n    @click.command()\n    @click.option(\"--legacy\", deprecated=\"Use --modern instead.\")\n    def cli(legacy):\n        click.echo(\"Done\")\n\n    runner = CliRunner()\n    result = runner.invoke(cli, [\"--legacy\", \"val\"])\n    assert result.exit_code == 0\n    assert \"Use --modern instead\" in result.output\n"
+  ],
+  "regression_tests": [
+    "pytest tests/test_basic.py"
+  ],
+  "reference_patch": "--- a/src/click/core.py\n+++ b/src/click/core.py\n@@ -2310,6 +2310,7 @@ class Option(Parameter):\n         prompt_required: bool = True,\n         count: bool = False,\n         show_envvar: bool = False,\n+        deprecated: bool | str = False,\n         **attrs: t.Any,\n     ) -> None:\n+        self.deprecated = deprecated\n@@ -2500,6 +2501,13 @@ class Option(Parameter):\n             value = self.process_value(ctx, value)\n \n+        if value is not None and self.deprecated:\n+            msg = f\"Option '{self.opts[0]}' is deprecated.\" if self.deprecated is True else str(self.deprecated)\n+            echo(f\"Warning: {msg}\", err=True)\n+\n         if self.expose_value:\n             ctx.params[self.name] = value\n",
+  "metadata": {
+    "generator": "InnoTask-Factory-v1.0",
+    "framework": "Harbor-v0.25.x",
+    "target_project": "pallets/click"
+  }
+}

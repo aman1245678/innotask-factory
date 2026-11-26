@@ -1,0 +1,19 @@
+--- a/src/click/core.py
++++ b/src/click/core.py
+@@ -2310,6 +2310,7 @@ class Option(Parameter):
+         prompt_required: bool = True,
+         count: bool = False,
+         show_envvar: bool = False,
++        deprecated: bool | str = False,
+         **attrs: t.Any,
+     ) -> None:
++        self.deprecated = deprecated
+@@ -2500,6 +2501,13 @@ class Option(Parameter):
+             value = self.process_value(ctx, value)
+ 
++        if value is not None and self.deprecated:
++            msg = f"Option '{self.opts[0]}' is deprecated." if self.deprecated is True else str(self.deprecated)
++            echo(f"Warning: {msg}", err=True)
++
+         if self.expose_value:
+             ctx.params[self.name] = value

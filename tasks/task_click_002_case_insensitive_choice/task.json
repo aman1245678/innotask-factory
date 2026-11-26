@@ -1,0 +1,46 @@
+{
+  "task_id": "task_click_002_case_insensitive_choice",
+  "target_repo": "https://github.com/pallets/click",
+  "baseline_commit": "7eb021a68430dc0702d1d0ad510617ad4ea9ad27",
+  "harbor_spec_version": "0.25.2",
+  "requirement": {
+    "title": "Add `case_sensitive=False` support to `click.Choice` parameter type",
+    "description": "Allow `click.Choice` to accept case-insensitive user input when `case_sensitive=False`. The parsed value returned to the command function should be normalized to the canonical choice spelling.",
+    "acceptance_criteria": [
+      "Support `case_sensitive: bool = True` on `click.Choice`.",
+      "When `case_sensitive=False`, choices match case-insensitively (e.g., 'RED' matches 'red').",
+      "The returned parameter value must match the original choice capitalization.",
+      "Invalid options must still raise `click.BadParameter` error.",
+      "Default behavior must preserve strict `case_sensitive=True` matching."
+    ],
+    "affected_files": [
+      "src/click/types.py"
+    ],
+    "difficulty": "easy",
+    "category": "feature_development"
+  },
+  "environment": {
+    "docker_image": "python:3.11-slim",
+    "working_dir": "/workspace",
+    "setup_commands": [
+      "pip install --upgrade pip",
+      "pip install pytest",
+      "pip install -e ."
+    ],
+    "timeout_seconds": 300,
+    "memory_limit": "2g",
+    "cpu_limit": "2"
+  },
+  "feature_tests": [
+    "import click\nimport pytest\nfrom click.testing import CliRunner\n\ndef test_case_insensitive_choice():\n    choice_type = click.Choice([\"Apple\", \"Banana\"], case_sensitive=False)\n    ctx = click.Context(click.Command(\"test\"))\n    \n    # Should normalize uppercase to canonical choice\n    assert choice_type.convert(\"apple\", None, ctx) == \"Apple\"\n    assert choice_type.convert(\"BANANA\", None, ctx) == \"Banana\"\n\ndef test_case_insensitive_invalid():\n    choice_type = click.Choice([\"Apple\", \"Banana\"], case_sensitive=False)\n    ctx = click.Context(click.Command(\"test\"))\n    with pytest.raises(click.BadParameter):\n        choice_type.convert(\"Cherry\", None, ctx)\n"
+  ],
+  "regression_tests": [
+    "pytest tests/test_basic.py"
+  ],
+  "reference_patch": "--- a/src/click/types.py\n+++ b/src/click/types.py\n@@ -175,6 +175,7 @@ class Choice(ParamType):\n     def __init__(\n         self,\n         choices: t.Sequence[str],\n+        case_sensitive: bool = True,\n     ) -> None:\n         self.choices = choices\n+        self.case_sensitive = case_sensitive\n@@ -200,6 +201,11 @@ class Choice(ParamType):\n         normed_value = value\n+        if not self.case_sensitive:\n+            match = next((c for c in self.choices if c.lower() == value.lower()), None)\n+            if match is not None:\n+                return match\n         if normed_value in self.choices:\n             return normed_value\n",
+  "metadata": {
+    "generator": "InnoTask-Factory-v1.0",
+    "framework": "Harbor-v0.25.x",
+    "target_project": "pallets/click"
+  }
+}

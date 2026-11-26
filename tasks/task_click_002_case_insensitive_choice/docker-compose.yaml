@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  harbor-evaluator:
+    build: .
+    container_name: harbor_task_click_002_case_insensitive_choice
+    working_dir: /workspace
+    volumes:
+      - .:/harbor_host
+    environment:
+      - HARBOR_TASK_ID=task_click_002_case_insensitive_choice
+      - HARBOR_SPEC_VERSION=0.25.2

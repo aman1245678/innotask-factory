@@ -1,0 +1,18 @@
+--- a/src/click/types.py
++++ b/src/click/types.py
+@@ -175,6 +175,7 @@ class Choice(ParamType):
+     def __init__(
+         self,
+         choices: t.Sequence[str],
++        case_sensitive: bool = True,
+     ) -> None:
+         self.choices = choices
++        self.case_sensitive = case_sensitive
+@@ -200,6 +201,11 @@ class Choice(ParamType):
+         normed_value = value
++        if not self.case_sensitive:
++            match = next((c for c in self.choices if c.lower() == value.lower()), None)
++            if match is not None:
++                return match
+         if normed_value in self.choices:
+             return normed_value

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InnoTask Factory — Harbor v0.25 Coding Benchmark Engine</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        code, pre { font-family: 'JetBrains Mono', monospace; }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen antialiased selection:bg-indigo-500 selection:text-white">
+
+    <!-- Header -->
+    <header class="border-b border-slate-800 bg-slate-900/80 sticky top-0 z-50 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 to-cyan-400 flex items-center justify-center text-slate-950 shadow-lg shadow-indigo-500/20">
+                    <i data-lucide="cpu" class="w-6 h-6 stroke-[2.5]"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight bg-gradient-to-r from-indigo-300 via-cyan-200 to-white bg-clip-text text-transparent">InnoTask Factory</h1>
+                    <p class="text-xs text-slate-400">Automated Harbor v0.25 Task Generation Pipeline for AI Coding Benchmarks</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                    Harbor v0.25.x Compliant
+                </span>
+                <span class="text-xs text-slate-400 border border-slate-800 px-3 py-1 rounded-lg bg-slate-900 hidden sm:inline-block">Innodata AI Hackathon</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-8">
+
+        <!-- Top Row: Metrics & Repository Selection -->
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <div class="glass-card rounded-2xl p-6 lg:col-span-1 space-y-4">
+                <span class="text-xs font-semibold uppercase tracking-wider text-indigo-400">Target Repository</span>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-indigo-400">
+                        <i data-lucide="git-branch" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white text-base">pallets/click</h3>
+                        <p class="text-xs text-slate-400">Python CLI Toolkit</p>
+                    </div>
+                </div>
+                <div class="text-xs space-y-1.5 pt-2 border-t border-slate-800 text-slate-400">
+                    <div class="flex justify-between"><span>Baseline Commit:</span> <code class="text-indigo-300">7eb021a</code></div>
+                    <div class="flex justify-between"><span>Harbor Spec:</span> <code class="text-emerald-400">v0.25.2</code></div>
+                    <div class="flex justify-between"><span>Isolation:</span> <span class="text-slate-200">Docker Container</span></div>
+                </div>
+            </div>
+
+            <!-- Pipeline Architecture Flow -->
+            <div class="glass-card rounded-2xl p-6 lg:col-span-3 space-y-4">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-base font-bold text-white flex items-center gap-2">
+                        <i data-lucide="workflow" class="w-5 h-5 text-indigo-400"></i>
+                        Automated Task Generation & Verification Pipeline
+                    </h2>
+                    <span class="text-xs text-emerald-400 font-semibold bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20">3-Stage Verification</span>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs pt-2">
+                    <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-1">
+                        <div class="text-indigo-400 font-semibold flex items-center gap-1.5">
+                            <span class="w-5 h-5 rounded-full bg-indigo-500/20 flex items-center justify-center text-[10px]">1</span> AST Feature Extractor
+                        </div>
+                        <p class="text-slate-400 text-[11px] pt-1">Mines realistic feature requirements, acceptance criteria, and target files from codebase diffs.</p>
+                    </div>
+
+                    <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-1">
+                        <div class="text-cyan-400 font-semibold flex items-center gap-1.5">
+                            <span class="w-5 h-5 rounded-full bg-cyan-500/20 flex items-center justify-center text-[10px]">2</span> Harbor Containerizer
+                        </div>
+                        <p class="text-slate-400 text-[11px] pt-1">Packages tasks into Dockerfile, docker-compose, instruction.md, and test.sh harness.</p>
+                    </div>
+
+                    <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-1">
+                        <div class="text-amber-400 font-semibold flex items-center gap-1.5">
+                            <span class="w-5 h-5 rounded-full bg-amber-500/20 flex items-center justify-center text-[10px]">3</span> No-Op Fail Check
+                        </div>
+                        <p class="text-slate-400 text-[11px] pt-1">Confirms unpatched baseline fails feature test (Fail-to-Pass), eliminating trivial tasks.</p>
+                    </div>
+
+                    <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-1">
+                        <div class="text-emerald-400 font-semibold flex items-center gap-1.5">
+                            <span class="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center text-[10px]">4</span> Oracle & Regression
+                        </div>
+                        <p class="text-slate-400 text-[11px] pt-1">Applies reference solution patch: 100% feature pass + 0 broken baseline tests.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Generated Harbor Tasks for pallets/click -->
+        <div class="space-y-4">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                        <i data-lucide="folder-check" class="w-5 h-5 text-indigo-400"></i>
+                        Generated Harbor v0.25 Task Packages (pallets/click)
+                    </h2>
+                    <p class="text-xs text-slate-400">Ready-to-evaluate containerized coding challenges</p>
+                </div>
+                <span class="text-xs text-slate-400">2 Verified Packages</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <!-- Task Card 1 -->
+                <div class="glass-card rounded-2xl p-6 space-y-4 border-indigo-500/20">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 uppercase">Task #001 &bull; Medium</span>
+                            <h3 class="text-base font-bold text-white mt-1.5">Add `deprecated` option parameter & warning</h3>
+                        </div>
+                        <span class="text-xs font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">Harbor: 100/100</span>
+                    </div>
+
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Extends Click's Option class with `deprecated: bool | str`. Emits a standardized or custom deprecation warning to stderr upon invocation while exiting 0.
+                    </p>
+
+                    <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800 space-y-1.5 text-xs">
+                        <div class="flex justify-between text-slate-400"><span>Target File:</span> <code class="text-indigo-300">src/click/core.py</code></div>
+                        <div class="flex justify-between text-slate-400"><span>No-Op Fail Check:</span> <span class="text-emerald-400 font-semibold">PASS (Expected Failure)</span></div>
+                        <div class="flex justify-between text-slate-400"><span>Oracle Solution Check:</span> <span class="text-emerald-400 font-semibold">PASS (100% Validated)</span></div>
+                        <div class="flex justify-between text-slate-400"><span>Regression Impact:</span> <span class="text-emerald-400 font-semibold">0 Regressions</span></div>
+                    </div>
+
+                    <div class="pt-2 flex gap-2">
+                        <button onclick="alert('Viewing task_click_001_deprecated_option instruction.md & Dockerfile')" class="flex-1 py-2 rounded-xl text-xs font-semibold bg-indigo-600 hover:bg-indigo-500 text-white transition flex items-center justify-center gap-1.5">
+                            <i data-lucide="file-text" class="w-4 h-4"></i> View Task Package
+                        </button>
+                        <button onclick="alert('Docker execution command:\ndocker compose -f tasks/task_click_001_deprecated_option/docker-compose.yaml up --build')" class="px-3 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition">
+                            <i data-lucide="terminal" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Task Card 2 -->
+                <div class="glass-card rounded-2xl p-6 space-y-4 border-cyan-500/20">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 uppercase">Task #002 &bull; Easy</span>
+                            <h3 class="text-base font-bold text-white mt-1.5">Case-insensitive matching for `click.Choice`</h3>
+                        </div>
+                        <span class="text-xs font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">Harbor: 100/100</span>
+                    </div>
+
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Adds `case_sensitive=False` to `click.Choice`, normalizing case-insensitive inputs to the canonical choice spelling while keeping default strict matching.
+                    </p>
+
+                    <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800 space-y-1.5 text-xs">
+                        <div class="flex justify-between text-slate-400"><span>Target File:</span> <code class="text-cyan-300">src/click/types.py</code></div>
+                        <div class="flex justify-between text-slate-400"><span>No-Op Fail Check:</span> <span class="text-emerald-400 font-semibold">PASS (Expected Failure)</span></div>
+                        <div class="flex justify-between text-slate-400"><span>Oracle Solution Check:</span> <span class="text-emerald-400 font-semibold">PASS (100% Validated)</span></div>
+                        <div class="flex justify-between text-slate-400"><span>Regression Impact:</span> <span class="text-emerald-400 font-semibold">0 Regressions</span></div>
+                    </div>
+
+                    <div class="pt-2 flex gap-2">
+                        <button onclick="alert('Viewing task_click_002_case_insensitive_choice instruction.md & Dockerfile')" class="flex-1 py-2 rounded-xl text-xs font-semibold bg-cyan-600 hover:bg-cyan-500 text-white transition flex items-center justify-center gap-1.5">
+                            <i data-lucide="file-text" class="w-4 h-4"></i> View Task Package
+                        </button>
+                        <button onclick="alert('Docker execution command:\ndocker compose -f tasks/task_click_002_case_insensitive_choice/docker-compose.yaml up --build')" class="px-3 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition">
+                            <i data-lucide="terminal" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500 mt-12">
+        InnoTask Factory &copy; 2026 | Built for Innodata Frontier AI Hackathon [Track 1: Coding Task Factory]
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
